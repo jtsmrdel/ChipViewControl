@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.name         = "ChipViewControl"
   s.version      = "1.0.0"
   s.summary      = "A simple auto-sizing, scrollable, chip view control for iOS"
+  s.swift_version = "4.0"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +26,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-A simple auto-sizing, scrollable, chip view control for iOS
+A simple auto-sizing, scrollable, chip view control for iOS.
                    DESC
 
   s.homepage     = "https://github.com/jtsmrd/ChipViewControl"
