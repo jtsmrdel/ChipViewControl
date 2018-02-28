@@ -19,7 +19,7 @@ import UIKit
 
 @objc public protocol ChipViewControlDelegate: class, NSObjectProtocol {
     
-    @objc optional func chipViewControl(chipViewControl: ChipViewControl, didRemoveChipViewAtIndex index: Int)
+    @objc func chipViewControl(chipViewControl: ChipViewControl, didRemoveChipViewAtIndex index: Int)
     @objc optional func chipViewControl(chipViewControl: ChipViewControl, didReturnWithText text: String?)
     @objc optional func chipViewControl(chipViewControl: ChipViewControl, textDidChange text: String)
     @objc optional func chipViewControlDidBeginEditing(chipViewControl: ChipViewControl)
@@ -353,9 +353,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
                     textField.text = ""
                     
                     if let delegate = delegate {
-                        if delegate.responds(to: #selector(ChipViewControlDelegate.chipViewControl(chipViewControl:didRemoveChipViewAtIndex:))) {
-                            delegate.chipViewControl!(chipViewControl: self, didRemoveChipViewAtIndex: removeIndex)
-                        }
+                        delegate.chipViewControl(chipViewControl: self, didRemoveChipViewAtIndex: removeIndex)
                     }
                     
                     // After deleting all of the chips, re-configure chip text field to show placeholder
@@ -397,9 +395,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         chipViews.removeObject(at: index)
         
         if let delegate = delegate {
-            if delegate.responds(to: #selector(ChipViewControlDelegate.chipViewControl(chipViewControl:didRemoveChipViewAtIndex:))) {
-                delegate.chipViewControl!(chipViewControl: self, didRemoveChipViewAtIndex: index)
-            }
+            delegate.chipViewControl(chipViewControl: self, didRemoveChipViewAtIndex: index)
         }
         
         // After deleting all of the chips, re-configure chip text field to show placeholder
