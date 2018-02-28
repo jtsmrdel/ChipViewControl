@@ -200,7 +200,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         // Keep track of whether or not the chip text field is the first responder
         // since it's removed, re-configured, and re-added to the view
         var chipTextFieldIsFirstResponder = false
-        if chipViews.contains(chipTextFieldView) {
+        if chipTextFieldView != nil && chipViews.contains(chipTextFieldView) {
             chipTextFieldIsFirstResponder = chipTextFieldView.chipTextField.isFirstResponder
         }
         
