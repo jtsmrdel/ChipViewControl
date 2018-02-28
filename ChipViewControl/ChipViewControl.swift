@@ -194,6 +194,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         reloadData()
     }
     
+    // Redraw the chips in the chip view control
     public func reloadData() {
         
         // Keep track of whether or not the chip text field is the first responder
