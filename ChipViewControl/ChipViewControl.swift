@@ -194,7 +194,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         reloadData()
     }
     
-    func reloadData() {
+    public func reloadData() {
         
         // Keep track of whether or not the chip text field is the first responder
         // since it's removed, re-configured, and re-added to the view
