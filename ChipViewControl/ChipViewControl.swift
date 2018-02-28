@@ -234,7 +234,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         
         let placeholder = numberOfChips > 0 ? nil : _placeholderText
         
-        if chipViews.contains(chipTextFieldView) {
+        if chipTextFieldView != nil && chipViews.contains(chipTextFieldView) {
             
             chipTextFieldView.removeFromSuperview()
             chipViews.remove(chipTextFieldView)
