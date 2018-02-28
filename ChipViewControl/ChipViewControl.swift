@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol ChipViewControlDataSource: class, NSObjectProtocol {
+@objc public protocol ChipViewControlDataSource: class, NSObjectProtocol {
     
     func numberOfChips(in chipViewControl: ChipViewControl) -> Int
     func chipViewTitle(for index: Int) -> String
@@ -17,7 +17,7 @@ import UIKit
     @objc optional func customize(chipViewControl: ChipViewControl)
 }
 
-@objc protocol ChipViewControlDelegate: class, NSObjectProtocol {
+@objc public protocol ChipViewControlDelegate: class, NSObjectProtocol {
     
     @objc optional func chipViewControl(chipViewControl: ChipViewControl, didRemoveChipViewAtIndex index: Int)
     @objc optional func chipViewControl(chipViewControl: ChipViewControl, didReturnWithText text: String?)
@@ -27,7 +27,7 @@ import UIKit
     @objc optional func chipViewControlDidEndEditing(chipViewControl: ChipViewControl)
 }
 
-class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrollViewDelegate {
+public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak private var dataSource: ChipViewControlDataSource?
     @IBOutlet weak private var delegate: ChipViewControlDelegate?
@@ -62,7 +62,7 @@ class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrol
         return Int(intrinsicContentSize.height / heightForChip)
     }
     
-    override var intrinsicContentSize: CGSize {
+    override public var intrinsicContentSize: CGSize {
         get {
             if chipViews.count == 0 {
                 return .zero
@@ -81,17 +81,17 @@ class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrol
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         setup()
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         let chipViewEnumerator = chipViews.objectEnumerator()
@@ -128,7 +128,7 @@ class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrol
         innerChipContainerViewHeightConstraint.constant = intrinsicContentSize.height + (margin * 2)
     }
     
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         
         // This delegate function is used to animate the scroll view when removing rows
         // before the subviews are layed out
@@ -299,7 +299,7 @@ class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrol
     }
     
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if let textField = textField as? ChipTextField {
             tempTextFieldText = textField.rawText
@@ -312,7 +312,7 @@ class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrol
         }
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
         guard let delegate = delegate else { return true }
         
@@ -322,7 +322,7 @@ class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrol
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
         
         guard let delegate = delegate else { return }
         
@@ -375,7 +375,7 @@ class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, UIScrol
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         guard let delegate = delegate else { return true }
         
