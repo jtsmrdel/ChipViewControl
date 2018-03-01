@@ -66,7 +66,7 @@ A simple auto-sizing, scrollable, chip view control for iOS.
   #
 
   s.platform     = :ios
-  s.platform     = :ios, "11.0"
+  s.platform     = :ios, "10.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
