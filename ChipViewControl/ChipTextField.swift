@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChipTextField: UITextField {
+public class ChipTextField: UITextField {
 
     var rawText: String? {
         return super.text
@@ -32,7 +32,7 @@ class ChipTextField: UITextField {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -40,7 +40,7 @@ class ChipTextField: UITextField {
         super.init(frame: frame)
     }
     
-    override func addGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
+    override public func addGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
         
         // Disable zooming
         if gestureRecognizer.isKind(of: UILongPressGestureRecognizer.self) {

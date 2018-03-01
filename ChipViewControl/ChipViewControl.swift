@@ -35,7 +35,6 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
     private var chipScrollView: UIScrollView!
     private var innerChipContainerView: UIView!
     private var innerChipContainerViewHeightConstraint: NSLayoutConstraint!
-    private var chipTextFieldView: ChipTextFieldView!
     private var tempTextFieldText: String?
     private var chipViews = NSMutableArray()
     private var chipContainerViewHeightConstraint: NSLayoutConstraint!
@@ -43,14 +42,15 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
     private var heightForChip: CGFloat!
     private var margin: CGFloat!
     private var rowRemoved = false
+    public var chipTextFieldView: ChipTextFieldView!
     
-    var _placeholderText: String? = nil
-    var _textFieldFont: UIFont? = UIFont.systemFont(ofSize: 17.0)
-    var _chipFont: UIFont? = UIFont.systemFont(ofSize: 17.0)
-    var _chipFontColor: UIColor? = UIColor.black
-    var _chipBackgroundColor: UIColor? = UIColor.groupTableViewBackground
-    var _deleteButtonBackgroundColor: UIColor? = UIColor.white
-    var _deleteButtonXColor: UIColor? = UIColor.lightGray
+    public var _placeholderText: String? = nil
+    public var _textFieldFont: UIFont? = UIFont.systemFont(ofSize: 17.0)
+    public var _chipFont: UIFont? = UIFont.systemFont(ofSize: 17.0)
+    public var _chipFontColor: UIColor? = UIColor.black
+    public var _chipBackgroundColor: UIColor? = UIColor.groupTableViewBackground
+    public var _deleteButtonBackgroundColor: UIColor? = UIColor.white
+    public var _deleteButtonXColor: UIColor? = UIColor.lightGray
     
     var numberOfChips: Int {
         

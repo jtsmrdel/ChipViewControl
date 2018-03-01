@@ -8,19 +8,19 @@
 
 import UIKit
 
-class ChipTextFieldView: UIView {
+public class ChipTextFieldView: UIView {
 
-    var chipTextField: ChipTextField!
+    public var chipTextField: ChipTextField!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         addConstraint(NSLayoutConstraint(item: chipTextField, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0))
