@@ -336,6 +336,13 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         
         // If text is empty and there aren't any chips, display placeholder by returning
         if textField.rawText == "" && numberOfChips == 0 {
+            
+            if let delegate = delegate {
+                if delegate.responds(to: #selector(ChipViewControlDelegate.chipViewControl(chipViewControl:textDidChange:))) {
+                    delegate.chipViewControl!(chipViewControl: self, textDidChange: textField.text ?? "")
+                }
+            }
+            
             return
         }
         
