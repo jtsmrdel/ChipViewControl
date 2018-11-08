@@ -259,8 +259,8 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         
         for chipView in chipViews {
             
-            let chipContainerViewWidth = max(innerChipContainerView.bounds.width - margin, (chipView as AnyObject).frame.width)
-            let chipWidth = min(innerChipContainerView.bounds.width, (chipView as AnyObject).frame.width)
+            let chipContainerViewWidth = max(innerChipContainerView.bounds.width - margin, (chipView as! UIView).frame.width)
+            let chipWidth = min(innerChipContainerView.bounds.width, (chipView as! UIView).frame.width)
             
             if x > (chipContainerViewWidth - chipWidth) {
                 y += heightForChip + margin
