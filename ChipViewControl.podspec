@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
 
   s.name         = "ChipViewControl"
-  s.version      = "1.2.1"
+  s.version      = "1.3.0"
   s.summary      = "A simple auto-sizing, scrollable, chip view control for iOS"
-  s.swift_version = "4.2"
+  s.swift_version = "5.0"
   s.description  = <<-DESC
 A simple auto-sizing, scrollable, chip view control for iOS.
                    DESC

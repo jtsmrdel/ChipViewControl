@@ -36,17 +36,17 @@ class ChipView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 8.0))
+        addConstraint(NSLayoutConstraint(item: titleLabel!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: titleLabel!, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 8.0))
         
         
-        addConstraint(NSLayoutConstraint(item: deleteView, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1.0, constant: 5.0))
-        addConstraint(NSLayoutConstraint(item: deleteView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: -5.0))
+        addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1.0, constant: 5.0))
+        addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: -5.0))
         
-        addConstraint(NSLayoutConstraint(item: deleteView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 5.0))
-        addConstraint(NSLayoutConstraint(item: deleteView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -5.0))
+        addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 5.0))
+        addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -5.0))
         
-        addConstraint(NSLayoutConstraint(item: deleteView, attribute: .width, relatedBy: .equal, toItem: deleteView, attribute: .height, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .width, relatedBy: .equal, toItem: deleteView, attribute: .height, multiplier: 1.0, constant: 0.0))
     }
     
     func configure(chipTitle: String, heightForChip: CGFloat, availableWidth: CGFloat, chipFont: UIFont?, chipFontColor: UIColor?, chipBackgroundColor: UIColor?, deleteViewBackgroundColor: UIColor?, deleteViewXColor: UIColor?) {

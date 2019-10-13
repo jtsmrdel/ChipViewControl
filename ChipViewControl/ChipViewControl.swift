@@ -168,10 +168,10 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         chipScrollView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(chipScrollView)
         
-        addConstraint(NSLayoutConstraint(item: chipScrollView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: chipScrollView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: chipScrollView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: chipScrollView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: chipScrollView!, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: chipScrollView!, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: chipScrollView!, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: chipScrollView!, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0))
         
         // Configure chip container view
         innerChipContainerView = UIView()
@@ -179,13 +179,13 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         innerChipContainerView.translatesAutoresizingMaskIntoConstraints = false
         chipScrollView.addSubview(innerChipContainerView)
         
-        addConstraint(NSLayoutConstraint(item: innerChipContainerView, attribute: .top, relatedBy: .equal, toItem: chipScrollView, attribute: .top, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: innerChipContainerView, attribute: .leading, relatedBy: .equal, toItem: chipScrollView, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: innerChipContainerView, attribute: .trailing, relatedBy: .equal, toItem: chipScrollView, attribute: .trailing, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: innerChipContainerView, attribute: .bottom, relatedBy: .equal, toItem: chipScrollView, attribute: .bottom, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: innerChipContainerView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: innerChipContainerView!, attribute: .top, relatedBy: .equal, toItem: chipScrollView, attribute: .top, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: innerChipContainerView!, attribute: .leading, relatedBy: .equal, toItem: chipScrollView, attribute: .leading, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: innerChipContainerView!, attribute: .trailing, relatedBy: .equal, toItem: chipScrollView, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: innerChipContainerView!, attribute: .bottom, relatedBy: .equal, toItem: chipScrollView, attribute: .bottom, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: innerChipContainerView!, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: 0.0))
         
-        innerChipContainerViewHeightConstraint = NSLayoutConstraint(item: innerChipContainerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: intrinsicContentSize.height)
+        innerChipContainerViewHeightConstraint = NSLayoutConstraint(item: innerChipContainerView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: intrinsicContentSize.height)
         addConstraint(innerChipContainerViewHeightConstraint)
         
         
@@ -200,7 +200,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         // Keep track of whether or not the chip text field is the first responder
         // since it's removed, re-configured, and re-added to the view
         var chipTextFieldIsFirstResponder = false
-        if chipTextFieldView != nil && chipViews.contains(chipTextFieldView) {
+        if chipTextFieldView != nil && chipViews.contains(chipTextFieldView!) {
             chipTextFieldIsFirstResponder = chipTextFieldView.chipTextField.isFirstResponder
         }
         
@@ -234,10 +234,10 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         
         let placeholder = numberOfChips > 0 ? nil : _placeholderText
         
-        if chipTextFieldView != nil && chipViews.contains(chipTextFieldView) {
+        if chipTextFieldView != nil && chipViews.contains(chipTextFieldView!) {
             
             chipTextFieldView.removeFromSuperview()
-            chipViews.remove(chipTextFieldView)
+            chipViews.remove(chipTextFieldView!)
         }
         
         chipTextFieldView = ChipTextFieldView()
@@ -245,7 +245,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         chipTextFieldView.chipTextField.delegate = self
         chipTextFieldView.chipTextField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         innerChipContainerView.addSubview(chipTextFieldView)
-        chipViews.add(chipTextFieldView)
+        chipViews.add(chipTextFieldView!)
         
         if textFieldIsFirstResponder {
             chipTextFieldView.chipTextField.becomeFirstResponder()

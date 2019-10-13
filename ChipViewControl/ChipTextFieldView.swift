@@ -23,9 +23,9 @@ public class ChipTextFieldView: UIView {
     override public func layoutSubviews() {
         super.layoutSubviews()
         
-        addConstraint(NSLayoutConstraint(item: chipTextField, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: chipTextField, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0))
-        addConstraint(NSLayoutConstraint(item: chipTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: chipTextField!, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: chipTextField!, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        addConstraint(NSLayoutConstraint(item: chipTextField!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
     }
     
     func configureView(heightForChip: CGFloat, placeholder: String?, font: UIFont?) {
