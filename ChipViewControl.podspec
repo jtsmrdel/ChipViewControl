@@ -10,7 +10,6 @@ A simple auto-sizing, scrollable, chip view control for iOS.
   s.homepage     = "https://github.com/jtsmrd/ChipViewControl"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "JT Smrdel" => "jtsmrdel@gmail.com" }
-  s.platform     = :ios
   s.platform     = :ios, "10.0"
   s.source       = { :git => "https://github.com/jtsmrd/ChipViewControl.git", :tag => "#{s.version}" }
   s.source_files  = "ChipViewControl/**/*.{swift}"
