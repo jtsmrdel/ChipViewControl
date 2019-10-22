@@ -40,7 +40,7 @@ class ChipView: UIView {
         addConstraint(NSLayoutConstraint(item: titleLabel!, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 8.0))
         
         
-        addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1.0, constant: 5.0))
+        addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailing, multiplier: 1.0, constant: 0.0))
         addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: -5.0))
         
         addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 5.0))
@@ -77,7 +77,7 @@ class ChipView: UIView {
         deleteView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeChip)))
         addSubview(deleteView)
         
-        frame = CGRect(x: 0, y: 0, width: 8 + titleLabel.frame.width + 5 + deleteView.frame.width + 5, height: heightForChip)
+        frame = CGRect(x: 0, y: 0, width: 8 + titleLabel.frame.width + deleteView.frame.width + 5, height: heightForChip)
     }
     
     @objc func removeChip() {
