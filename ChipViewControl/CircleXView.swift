@@ -11,11 +11,18 @@ import UIKit
 class CircleXView: UIView {
 
     var xColor = UIColor.lightGray
+    var hasBorder = false
+    var borderColor: UIColor = .white
     
     override func draw(_ rect: CGRect) {
         
         clipsToBounds = true
         layer.cornerRadius = rect.height / 2
+        
+        if hasBorder {
+            layer.borderWidth = 1.5
+            layer.borderColor = borderColor.cgColor
+        }
         
         let lineOnePath = UIBezierPath()
         lineOnePath.lineWidth = 1.5

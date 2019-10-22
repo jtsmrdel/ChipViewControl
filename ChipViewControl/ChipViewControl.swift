@@ -15,6 +15,7 @@ import UIKit
     func chipViewControlHeightConstraint(chipViewControl: ChipViewControl) -> NSLayoutConstraint
     func heightForChipView(in chipViewControl: ChipViewControl) -> CGFloat
     @objc optional func customize(chipViewControl: ChipViewControl)
+    func shouldIncludeTrailingTextField() -> Bool
 }
 
 @objc public protocol ChipViewControlDelegate: class, NSObjectProtocol {
@@ -42,7 +43,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
     private var heightForChip: CGFloat!
     private var margin: CGFloat!
     private var rowRemoved = false
-    public var chipTextFieldView: ChipTextFieldView!
+    public var chipTextFieldView: ChipTextFieldView?
     
     public var _placeholderText: String? = nil
     public var _textFieldFont: UIFont? = UIFont.systemFont(ofSize: 17.0)
@@ -51,6 +52,8 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
     public var _chipBackgroundColor: UIColor? = UIColor.groupTableViewBackground
     public var _deleteButtonBackgroundColor: UIColor? = UIColor.white
     public var _deleteButtonXColor: UIColor? = UIColor.lightGray
+    public var _deleteButtonHasBorder: Bool? = false
+    public var _deleteButtonBorderColor: UIColor? = .white
     
     var numberOfChips: Int {
         
@@ -200,7 +203,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         // Keep track of whether or not the chip text field is the first responder
         // since it's removed, re-configured, and re-added to the view
         var chipTextFieldIsFirstResponder = false
-        if chipTextFieldView != nil && chipViews.contains(chipTextFieldView!) {
+        if let chipTextFieldView = chipTextFieldView, chipViews.contains(chipTextFieldView) {
             chipTextFieldIsFirstResponder = chipTextFieldView.chipTextField.isFirstResponder
         }
         
@@ -219,7 +222,18 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
             
             let chip = ChipView(frame: CGRect(x: 0, y: 0, width: innerChipContainerView.frame.width, height: heightForChip))
             chip.delegate = self
-            chip.configure(chipTitle: chipTitle, heightForChip: heightForChip, availableWidth: innerChipContainerView.frame.width - margin, chipFont: _chipFont, chipFontColor: _chipFontColor, chipBackgroundColor: _chipBackgroundColor, deleteViewBackgroundColor: _deleteButtonBackgroundColor, deleteViewXColor: _deleteButtonXColor)
+            chip.configure(
+                chipTitle: chipTitle,
+                heightForChip: heightForChip,
+                availableWidth: innerChipContainerView.frame.width - margin,
+                chipFont: _chipFont,
+                chipFontColor: _chipFontColor,
+                chipBackgroundColor: _chipBackgroundColor,
+                deleteViewBackgroundColor: _deleteButtonBackgroundColor,
+                deleteViewXColor: _deleteButtonXColor,
+                deleteViewHasBorder: _deleteButtonHasBorder,
+                deleteViewBorderColor: _deleteButtonBorderColor
+            )
             innerChipContainerView.addSubview(chip)
             chipViews.add(chip)
         }
@@ -227,28 +241,33 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         configureChipTextFieldView(textFieldIsFirstResponder: chipTextFieldIsFirstResponder)
         
         setNeedsLayout()
-        chipTextFieldView.chipTextField.text = ""
+        
+        if let chipTextFieldView = chipTextFieldView {
+            chipTextFieldView.chipTextField.text = ""
+        }
     }
     
     private func configureChipTextFieldView(textFieldIsFirstResponder: Bool = false) {
         
+        guard let dataSource = dataSource, dataSource.shouldIncludeTrailingTextField() else { return }
+        
         let placeholder = numberOfChips > 0 ? nil : _placeholderText
         
-        if chipTextFieldView != nil && chipViews.contains(chipTextFieldView!) {
+        if let chipTextFieldView = chipTextFieldView, chipViews.contains(chipTextFieldView) {
             
             chipTextFieldView.removeFromSuperview()
-            chipViews.remove(chipTextFieldView!)
+            chipViews.remove(chipTextFieldView)
         }
         
         chipTextFieldView = ChipTextFieldView()
-        chipTextFieldView.configureView(heightForChip: heightForChip, placeholder: placeholder, font: _textFieldFont)
-        chipTextFieldView.chipTextField.delegate = self
-        chipTextFieldView.chipTextField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
-        innerChipContainerView.addSubview(chipTextFieldView)
+        chipTextFieldView!.configureView(heightForChip: heightForChip, placeholder: placeholder, font: _textFieldFont)
+        chipTextFieldView!.chipTextField.delegate = self
+        chipTextFieldView!.chipTextField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+        innerChipContainerView.addSubview(chipTextFieldView!)
         chipViews.add(chipTextFieldView!)
         
         if textFieldIsFirstResponder {
-            chipTextFieldView.chipTextField.becomeFirstResponder()
+            chipTextFieldView!.chipTextField.becomeFirstResponder()
         }
     }
     
@@ -296,7 +315,10 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
     
     
     @objc func focusOnTextField() {
-        chipTextFieldView.chipTextField.becomeFirstResponder()
+        
+        if let chipTextFieldView = chipTextFieldView {
+            chipTextFieldView.chipTextField.becomeFirstResponder()
+        }
     }
     
     
@@ -364,7 +386,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
                     }
                     
                     // After deleting all of the chips, re-configure chip text field to show placeholder
-                    if numberOfChips == 0 {
+                    if numberOfChips == 0, let chipTextFieldView = chipTextFieldView {
                         configureChipTextFieldView(textFieldIsFirstResponder: chipTextFieldView.chipTextField.isFirstResponder)
                     }
                 }
@@ -406,7 +428,7 @@ public class ChipViewControl: UIControl, UITextFieldDelegate, ChipViewDelegate, 
         }
         
         // After deleting all of the chips, re-configure chip text field to show placeholder
-        if numberOfChips == 0 {
+        if numberOfChips == 0, let chipTextFieldView = chipTextFieldView {
             configureChipTextFieldView(textFieldIsFirstResponder: chipTextFieldView.chipTextField.isFirstResponder)
         }
         

@@ -49,7 +49,7 @@ class ChipView: UIView {
         addConstraint(NSLayoutConstraint(item: deleteView!, attribute: .width, relatedBy: .equal, toItem: deleteView, attribute: .height, multiplier: 1.0, constant: 0.0))
     }
     
-    func configure(chipTitle: String, heightForChip: CGFloat, availableWidth: CGFloat, chipFont: UIFont?, chipFontColor: UIColor?, chipBackgroundColor: UIColor?, deleteViewBackgroundColor: UIColor?, deleteViewXColor: UIColor?) {
+    func configure(chipTitle: String, heightForChip: CGFloat, availableWidth: CGFloat, chipFont: UIFont?, chipFontColor: UIColor?, chipBackgroundColor: UIColor?, deleteViewBackgroundColor: UIColor?, deleteViewXColor: UIColor?, deleteViewHasBorder: Bool?, deleteViewBorderColor: UIColor?) {
         
         backgroundColor = chipBackgroundColor ?? UIColor.groupTableViewBackground
         
@@ -69,6 +69,8 @@ class ChipView: UIView {
         
         deleteView = CircleXView(frame: CGRect.zero)
         deleteView.xColor = deleteViewXColor ?? UIColor.lightGray
+        deleteView.hasBorder = deleteViewHasBorder ?? false
+        deleteView.borderColor = deleteViewBorderColor ?? UIColor.white
         deleteView.backgroundColor = deleteViewBackgroundColor ?? UIColor.white
         deleteView.translatesAutoresizingMaskIntoConstraints = false
         deleteView.frame = CGRect(x: 0, y: 0, width: heightForChip - 10, height: heightForChip - 10)
