@@ -26,15 +26,15 @@ class CircleXView: UIView {
         
         let lineOnePath = UIBezierPath()
         lineOnePath.lineWidth = 1.5
-        lineOnePath.move(to: CGPoint(x: rect.width * 0.25, y: rect.height * 0.75))
-        lineOnePath.addLine(to: CGPoint(x: rect.width * 0.75, y: rect.height * 0.25))
+        lineOnePath.move(to: CGPoint(x: rect.width * 0.35, y: rect.height * 0.65))
+        lineOnePath.addLine(to: CGPoint(x: rect.width * 0.65, y: rect.height * 0.35))
         xColor.setStroke()
         lineOnePath.stroke()
         
         let lineTwoPath = UIBezierPath()
         lineTwoPath.lineWidth = 1.5
-        lineTwoPath.move(to: CGPoint(x: rect.width * 0.25, y: rect.height * 0.25))
-        lineTwoPath.addLine(to: CGPoint(x: rect.width * 0.75, y: rect.height * 0.75))
+        lineTwoPath.move(to: CGPoint(x: rect.width * 0.35, y: rect.height * 0.35))
+        lineTwoPath.addLine(to: CGPoint(x: rect.width * 0.65, y: rect.height * 0.65))
         xColor.setStroke()
         lineTwoPath.stroke()
     }
